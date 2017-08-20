@@ -12,4 +12,7 @@
 export default {}
 </script>
 
-<style></style>
+<style>
+body{
+  background-image: url('statics/images/bg.gif')
+}</style>

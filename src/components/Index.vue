@@ -1,155 +1,216 @@
 <template>
-  <q-layout>
-    <div slot="header" class="toolbar">
-      <q-toolbar-title :padding="0">
-        CoserStage
+  <q-layout ref="layout" view="hHr LpR lFf" :right-breakpoint="1100">
+
+    <!-- <q-toolbar inverted color="red-3">
+                
+                <q-btn flat>
+                  <q-icon name="face" /></q-btn>
+                <q-toolbar-title>
+                 <strong> Coser Stage</strong>
+                </q-toolbar-title> -->
+
+    <!-- Header -->
+    <q-toolbar slot="header" color="purple-3">
+
+      <q-toolbar-title>
+        Cosplay Stage
+        <span slot="subtitle">专业的Cosplay平台</span>
       </q-toolbar-title>
-    </div>
+
+      <q-side-link item to="/login">
+        <q-item-main label="登陆" />
+      </q-side-link>/
+      <q-side-link item to="/login">
+        <q-item-main label="注册" />
+      </q-side-link>
+    </q-toolbar>
+
+    <!-- Navigation -->
+    <q-tabs slot="navigation" id="navbar" inverted color="white">
+      <q-tab slot="title" label="竞技堂" count="30" color="cyan-8" to="/login" exact />
+      <q-tab alert slot="title" label="TV" to="/login" color="teal-8" exact />
+      <q-tab alert slot="title" label="商城" to="/group" exact color="green-8" />
+      <q-tab slot="title" label="社团" to="/group" exact color="light-green-8" />
+      <q-tab slot="title" label="活动" to="/login" count="5" color="lime-8" />
+    </q-tabs>
 
     <!--
-      Replace following "div" with
-      "<router-view class="layout-view">" component
-      if using subRoutes
-    -->
+                      Replace following "div" with
+                      "<router-view class="layout-view">" component
+                      if using subRoutes
+                    -->
+                      <div class="container">
     <div class="layout-view">
-      <div class="logo-container non-selectable no-pointer-events">
-        <div class="logo" :style="position">
-          <img src="~assets/quasar-logo.png">
-          <p class="caption text-center">
-            <span v-if="orienting || rotating">Tilt your device.</span>
-            <template v-else>
-              <span class="desktop-only">Move your mouse.</span>
-              <span class="touch-only">Touch screen and move.</span>
-            </template>
-          </p>
-        </div>
+      <div class=" gutter wrap justify-center content-center text-center">
+
+        <carousel-3d :autlplay=true :display="7">
+          <slide :index="0">
+            <img src="statics/images/index-1.jpg" />
+          </slide>
+          <slide :index="1">
+            <img src="statics/images/index-2.jpg" />
+          </slide>
+          <slide :index="2">
+            <img src="statics/images/index-3.jpg" />
+          </slide>
+          <slide :index="3">
+            <img src="statics/images/index-4.jpg" />
+          </slide>
+          <slide :index="4">
+            <img src="statics/images/index-5.jpeg" />
+          </slide>
+          <slide :index="5">
+            <img src="statics/images/index-6.jpeg" />
+          </slide>
+          <slide :index="6">
+            <img src="statics/images/index-7.jpg" />
+          </slide>
+          <slide :index="7">
+            <img src="statics/images/index-8.jpg" />
+          </slide>
+        </carousel-3d>
       </div>
     </div>
+    <div>
+     <div>
+      <img class="pk" src="statics/images/pk.png">
+      <!-- <span class="text-bold">竞技台</span> -->
+    </div>
+  
+      <div class="row  items-center content-center  justify-center gutter">
+       
+        <div class="col-5 ">
+          <q-card  width="100%">
+            <q-card-media overlay-position="top">
+              <img  src="statics/images/index-5.jpeg" />
+              <q-card-title slot="overlay">
+                <div slot="subtitle" class="text-right">
+                  <q-btn flat round small color="red">
+                    <q-icon name="favorite" /></q-btn>
+                </div>
+              </q-card-title>
+            </q-card-media>
+
+            <q-card-title>
+              Cafe Basilico
+              <q-rating slot="subtitle" v-model="stars" disabled :max="5" />
+              <div slot="right" class="row items-center">
+                <q-icon name="place" /> 重庆
+              </div>
+            </q-card-title>
+            <q-card-main>
+              <p>力の社团</p>
+              <p class="text-faded">我是来至重庆的妹子,希望大家多多支持我</p>
+            </q-card-main>
+            <q-card-separator />
+          </q-card>
+
+        </div>
+        <div class="col-2" >
+          <img class=" text-center" width="60%" src="statics/images/vs.png">
+         
+        </div>
+
+        <div class="col-5">
+          <q-card  width="100%">
+            <q-card-media overlay-position="top">
+              <img  src="statics/images/index-3.jpg" />
+              <q-card-title slot="overlay" inverted>
+                <div slot="subtitle" class="text-right">
+                  <q-btn flat round small color="red">
+                    <q-icon name="favorite" /></q-btn>
+                </div>
+              </q-card-title>
+            </q-card-media>
+
+            <q-card-title>
+               BasilicoCafe
+              <q-rating slot="subtitle" v-model="stars" disabled :max="5" />
+              <div slot="right" class="row items-center">
+                <q-icon name="place" /> 成都
+              </div>
+            </q-card-title>
+            <q-card-main>
+              <p>hongの社团</p>
+              <p class="text-faded">我是来至成都的妹子,希望大家多多支持我</p>
+            </q-card-main>
+            <q-card-separator />
+          </q-card>
+
+        </div>
+
+      </div>
+    </div>
+    </div>
+
+    </div>
+    <!-- Footer -->
+    <q-toolbar slot="footer" inverted class="text-center">
+      <q-toolbar-title>
+        Cosplay Stage @2017
+      </q-toolbar-title>
+    </q-toolbar>
   </q-layout>
 </template>
 
 <script>
-const moveForce = 30
-const rotateForce = 40
-const RAD_TO_DEG = 180 / Math.PI
 
-import { Utils, Platform } from 'quasar'
 
-function getRotationFromAccel (accelX, accelY, accelZ) {
-  /* Reference: http://stackoverflow.com/questions/3755059/3d-accelerometer-calculate-the-orientation#answer-30195572 */
-  const sign = accelZ > 0 ? 1 : -1
-  const miu = 0.001
 
-  return {
-    roll: Math.atan2(accelY, sign * Math.sqrt(Math.pow(accelZ, 2) + miu * Math.pow(accelX, 2))) * RAD_TO_DEG,
-    pitch: -Math.atan2(accelX, Math.sqrt(Math.pow(accelY, 2) + Math.pow(accelZ, 2))) * RAD_TO_DEG
-  }
-}
+
+import { Carousel3d, Slide } from 'vue-carousel-3d';
 
 export default {
-  data () {
+  components: {
+    Carousel3d,
+    Slide
+  },
+  data() {
     return {
-      orienting: window.DeviceOrientationEvent && !Platform.is.desktop,
-      rotating: window.DeviceMotionEvent && !Platform.is.desktop,
-      moveX: 0,
-      moveY: 0,
-      rotateY: 0,
-      rotateX: 0
+      stars: 4
     }
   },
   computed: {
-    position () {
-      const transform = `rotateX(${this.rotateX}deg) rotateY(${this.rotateY}deg)`
-      return {
-        top: this.moveY + 'px',
-        left: this.moveX + 'px',
-        '-webkit-transform': transform,
-        '-ms-transform': transform,
-        transform
-      }
+    position() {
+
+
     }
   },
   methods: {
-    move (evt) {
-      const {width, height} = Utils.dom.viewport()
-      const {top, left} = Utils.event.position(evt)
-      const halfH = height / 2
-      const halfW = width / 2
 
-      this.moveX = (left - halfW) / halfW * -moveForce
-      this.moveY = (top - halfH) / halfH * -moveForce
-      this.rotateY = (left / width * rotateForce * 2) - rotateForce
-      this.rotateX = -((top / height * rotateForce * 2) - rotateForce)
-    },
-    rotate (evt) {
-      if (evt.rotationRate &&
-          evt.rotationRate.beta !== null &&
-          evt.rotationRate.gamma !== null) {
-        this.rotateX = evt.rotationRate.beta * 0.7
-        this.rotateY = evt.rotationRate.gamma * -0.7
-      }
-      else {
-        /* evt.acceleration may be null in some cases, so we'll fall back
-           to evt.accelerationIncludingGravity */
-        const accelX = evt.acceleration.x || evt.accelerationIncludingGravity.x
-        const accelY = evt.acceleration.y || evt.accelerationIncludingGravity.y
-        const accelZ = evt.acceleration.z || evt.accelerationIncludingGravity.z - 9.81
-
-        const rotation = getRotationFromAccel(accelX, accelY, accelZ)
-        this.rotateX = rotation.roll * 0.7
-        this.rotateY = rotation.pitch * -0.7
-      }
-    },
-    orient (evt) {
-      if (evt.beta === null || evt.gamma === null) {
-        window.removeEventListener('deviceorientation', this.orient, false)
-        this.orienting = false
-
-        window.addEventListener('devicemotion', this.rotate, false)
-      }
-      else {
-        this.rotateX = evt.beta * 0.7
-        this.rotateY = evt.gamma * -0.7
-      }
-    }
   },
-  mounted () {
+  mounted() {
     this.$nextTick(() => {
-      if (this.orienting) {
-        window.addEventListener('deviceorientation', this.orient, false)
-      }
-      else if (this.rotating) {
-        window.addEventListener('devicemove', this.rotate, false)
-      }
-      else {
-        document.addEventListener('mousemove', this.move)
-      }
+
     })
   },
-  beforeDestroy () {
-    if (this.orienting) {
-      window.removeEventListener('deviceorientation', this.orient, false)
-    }
-    else if (this.rotating) {
-      window.removeEventListener('devicemove', this.rotate, false)
-    }
-    else {
-      document.removeEventListener('mousemove', this.move)
-    }
+  beforeDestroy() {
+
+  }, created() {
+
   }
 }
 </script>
 
-<style lang="stylus">
-.logo-container
-  width 192px
-  height 268px
-  perspective 800px
-  position absolute
-  top 50%
-  left 50%
-  transform translateX(-50%) translateY(-50%)
-.logo
-  position absolute
-  transform-style preserve-3d
+<style>
+.pk {
+  height: 70px;
+  width: 70px;
+}
+
+.vs-img {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  display: block;
+}
+
+.scrolledDown {
+  background: rgba(0, 0, 0, 0);
+  color: #ddd;
+}
+.container{
+  padding-left: 5%;
+  padding-right: 5%;
+}
 </style>
