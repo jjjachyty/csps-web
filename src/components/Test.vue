@@ -1,56 +1,57 @@
 <template>
-<q-layout ref="layout" view="hHr LpR lFf" :right-breakpoint="1100">
-  <!-- Header -->
-  <q-toolbar slot="header">
-    <q-btn flat @click="$refs.layout.toggleLeft()">
-      <q-icon name="menu" />
-    </q-btn>
-    <q-toolbar-title>
-      Layout Header
-      <span slot="subtitle">专业的Cosplay平台</span>
-    </q-toolbar-title>
-
-  </q-toolbar>
-  <!-- Navigation -->
-  <q-tabs slot="navigation">
-    <q-route-tab slot="title" icon="view_quilt" to="/test-layout/about" replace hide="icon" label="About" />
-    <q-route-tab slot="title" icon="view_day" to="/test-layout/toolbar" replace hide="icon" label="Toolbar" />
-    <q-route-tab slot="title" icon="view_day" to="/test-layout/tabs" replace label="Tabs" />
-    <q-route-tab slot="title" icon="input" to="/test-layout/drawer" replace label="Drawer" />
-  </q-tabs>
-  <!-- Left Side Panel -->
-  <div slot="left">
-    <q-list no-border link inset-separator>
-      <q-list-header>Essential Links</q-list-header>
-      <q-side-link item to="/docs">
-        <q-item-side icon="school" />
-        <q-item-main label="Docs" sublabel="quasar-framework.org" />
-      </q-side-link>
-      <q-side-link item to="/forum">
-        <q-item-side icon="record_voice_over" />
-        <q-item-main label="Forum" sublabel="forum.quasar-framework.org" />
-      </q-side-link>
-      <q-side-link item to="/chat">
-        <q-item-side icon="chat" />
-        <q-item-main label="Gitter Channel" sublabel="Quasar Lobby" />
-      </q-side-link>
-      <q-side-link item to="/twitter">
-        <q-item-side icon="rss feed" />
-        <q-item-main label="Twitter" sublabel="@quasarframework" />
-      </q-side-link>
-    </q-list>
+  <div>
+    <q-input
+      v-model="form.email"
+      @blur="$v.form.email.$touch"
+      @keyup.enter="submit"
+      :error="$v.form.email.$error"
+    />
+    <q-btn color="primary" @click="submit">Submit</q-btn>
   </div>
-  <!-- Right Side Panel -->
-  <div slot="right">
-    Right Side of Layout
-  </div>
-  <!-- sub-routes get injected here: -->
-  <router-view />
-  <!-- Footer -->
-  <q-toolbar slot="footer">
-    <q-toolbar-title>
-      Layout Footer
-    </q-toolbar-title>
-  </q-toolbar>
-</q-layout>  
 </template>
+<script>
+import { required, email } from 'vuelidate/lib/validators'
+import { Toast } from 'quasar'
+export default {
+  data () {
+    return {
+      form: {
+        email: ''
+      }
+    }
+  },
+  validations: {
+    form: {
+      email: { required, email  }
+    }
+  },
+  methods: {
+    submit () {
+      this.$v.form.$touch()
+      if (this.$v.form.$error) {
+        Toast.create('Please review fields again.')
+        return
+      }
+      // ...
+    },sleep (time) {
+    return new function(){
+        setTimeout(function () {
+          console.log("xxx")
+           
+        }, time)
+    }
+},async start(){
+    console.log('start')
+     var  test = await function(){
+        setTimeout(function () {
+          console.log("xxx")
+        }, 3000)
+    console.log('end')
+}
+console.log(test)
+}
+  },mounted(){
+    this.start()
+  }
+}
+</script>

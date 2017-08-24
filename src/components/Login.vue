@@ -2,28 +2,40 @@
   <!-- root node required -->
   <div>
     <!-- your content -->
-   <q-layout>
+   <q-layout class="layout-padding">
       <div class="row gutter wrap justify-center content-center ">
-        <div class="width-4of4">
+        <div class="col-3 col-xl-4 col-xs-10">
           <div class="text-blod login-title text-center">
-            <h4>《登录》</h4>
+            <h4>{{$t("login.title")}}</h4>
           </div>
           <div>
             <div class="stacked-label">
-               <q-input v-model="user.password" float-label="11位手机号" inverted color="blue-7" type="password" :after="[{icon: 'done', condition: user.password.length >= 6, handler () {}}]" />
-
+                <q-field icon="phone_iphone"  :error="$v.userName.$error"  :error-label="userNameError">
+                  <q-input v-model="userName" :max-length="11" clearable autofocus color="bule" :float-label="$t('login.userNameFlabe')" @blur="$v.userName.$touch" :after="[{icon: 'done', condition: userName.length == 11&&!$v.userName.$error, handler () {}}]" />
+                </q-field>
             </div>
             <div class="stacked-label">
-               <q-input v-model="user.password" float-label="6-12位密码" inverted color="teal-7" type="password" :after="[{icon: 'done', condition: user.password.length >= 6, handler () {}}]" />
+               <!-- <q-input v-model="passWord" :before="[{icon: 'lock_outline'}]" :error="$v.passWord.$error"  float-label="密码"  color="teal-7" type="password" :after="[{icon: 'done', condition: passWord.length >= 6, handler () {}}]" /> -->
+                  <q-field icon="lock_outline" helper="6-12位包含大、小写字母和数字密码" :error="$v.passWord.$error" color="bule" error-label="">
+                  <q-input v-model="passWord" :max-length="16" clearable type="password" :float-label="$t('login.passWordFlabe')" @blur="$v.passWord.$touch" />
+                </q-field>
             </div>
-
+              <div class="stacked-label row items-center">
+                <q-field icon="closed_caption" helper="输入右边图中验证码" :error="$v.verCode.$error" class="col-8" :error-label="verCodeError">
+                  <q-input v-model="verCode" :max-length="4" clearable :float-label="$t('register.verCodeFlabe')" @blur="$v.verCode.$touch" :after="[{icon: 'done', condition: verCode.length == 4&& !$v.verCode.$error, handler () {}}]" />
+                </q-field>
+                <img class="col-4" height="42px" ref="verCodeImg" v-bind:src="verCodeUrl" v-on:click="refreshVerCode">
+  
+              </div>
             <div class="group">
 
-              <q-btn color="secondary" class="full-width"  @click="submit">登录</q-btn>
+              <!-- <q-btn color="secondary" class="full-width"  @click="submit">登录</q-btn> -->
+
+      <q-btn outline style="color: goldenrod;" class="full-width" @click="submit">登录</q-btn>
             </div>
             <div class="text-right">
-              <small>还没有账号？,赶紧
-                <router-link to="/register">注册</router-link>
+              <small>
+                <router-link to="/register">{{$t("login.regTips")}}</router-link>
               </small>
             </div>
           </div>
@@ -41,23 +53,42 @@
 
 <script>
 import { required, email } from 'vuelidate/lib/validators'
-import { Toast } from 'quasar'
+ import {Toast} from 'quasar'
+
+  import {
+    mapGetters,
+    mapActions
+  } from 'vuex'
+
+  import {
+    isPhone,
+    checkPassWord
+  } from '../validators'
+  import {
+    cspsApiRoot  } from '../config'
+  
 export default {
   data() {
     return {
-      user: {
-        name: '',
-        password: ''
-      }
+        verCodeUrl: cspsApiRoot + "/user/validateCode",
+        userName: '',
+        userNameError:'',
+        passWord: '',
+        verCode:''
     }
   }, validations: {
-    user: {
-      name: { required, email }
-    }
+      userName: { required,isPhone },
+      passWord: { required,checkPassWord },
+           verCode: {
+        required}
   }, methods: {
+          refreshVerCode() {
+        this.$refs.verCodeImg.src = this.verCodeUrl + "?tm=" + Math.random()
+      },
     submit() {
-      this.$v.user.$touch()
-      if (this.$v.user.$error) {
+      this.$v.userName.$touch()
+      this.$v.passWord.$touch()
+      if (this.$v.userName.$error || this.$v.passWord.$error) {
         //Toast.create('请输入正确的用户名')
         Toast.create({
           html: '请输入正确的用户名',
@@ -66,6 +97,9 @@ export default {
         })
         return
       }
+
+     this.$store.dispatch('userLogin',{userName:this.userName,passWord:this.passWord})
+
 
     }
   }

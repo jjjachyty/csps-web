@@ -10,7 +10,15 @@ import Vue from 'vue'
 import Quasar, * as All from 'quasar'
 import router from './router'
 import Vuelidate from 'vuelidate'
+import store from './store'
+import languages from './i18n'
 import Carousel3d from 'vue-carousel-3d';
+import VueI18n from 'vue-i18n'
+
+Vue.use(Vuelidate)
+
+Vue.use(VueI18n)
+
 Vue.use(Carousel3d)
 Vue.use(Vuelidate)
 Vue.use(Quasar, {
@@ -18,11 +26,22 @@ Vue.use(Quasar, {
         directives: All
     }) // Install Quasar Framework
 
+
+
+const i18n = new VueI18n({ 
+    locale: 'zh',
+    messages: languages
+})
+
 Quasar.start(() => {
     /* eslint-disable no-new */
     new Vue({
         el: '#q-app',
         router,
+        store,
+        i18n,
         render: h => h(require('./App'))
     })
 })
+window.router = router
+window.vue = Vue

@@ -1,0 +1,1 @@
+export const checkOutMessage = state => state.message
