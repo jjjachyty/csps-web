@@ -1,6 +1,6 @@
 <template>
   <q-layout ref="layout" view="hHr LpR lFf" :right-breakpoint="1100">
-
+    <HeaderBar :scrollTop="scrollTop"></HeaderBar>
     <!-- <q-toolbar inverted color="red-3">
                 
                 <q-btn flat>
@@ -10,7 +10,7 @@
                 </q-toolbar-title> -->
 
     <!-- Header -->
-    <q-toolbar slot="header" color="purple-3">
+    <!-- <q-toolbar slot="header" color="purple-3">
 
       <q-toolbar-title>
         Cosplay Stage
@@ -23,16 +23,16 @@
       <q-side-link item to="/login">
         <q-item-main label="注册" />
       </q-side-link>
-    </q-toolbar>
+    </q-toolbar> -->
 
     <!-- Navigation -->
-    <q-tabs slot="navigation" id="navbar" inverted color="white">
+    <!-- <q-tabs slot="navigation" id="navbar" inverted color="white">
       <q-tab slot="title" label="竞技堂" count="30" color="cyan-8" to="/login" exact />
       <q-tab alert slot="title" label="TV" to="/login" color="teal-8" exact />
       <q-tab alert slot="title" label="商城" to="/group" exact color="green-8" />
       <q-tab slot="title" label="社团" to="/group" exact color="light-green-8" />
       <q-tab slot="title" label="活动" to="/login" count="5" color="lime-8" />
-    </q-tabs>
+    </q-tabs> -->
 
     <!--
                       Replace following "div" with
@@ -159,28 +159,34 @@
 
 
 import { Carousel3d, Slide } from 'vue-carousel-3d';
-
+import HeaderBar from 'components/common/Header'
 export default {
   components: {
     Carousel3d,
-    Slide
+    Slide,
+    HeaderBar
   },
   data() {
     return {
-      stars: 4
+      stars: 4,
+      scrollTop:0
     }
   },
   computed: {
-    position() {
-
-
+    'position':()=> {
+       
+          console.log(this.$refs.layout.scrollTop)
+          return this.$refs.layout.scrollTop
     }
   },
   methods: {
-
+      handleScroll(){
+        this.scrollTop = window.pageYOffset|| document.documentElement.scrollTop || document.body.scrollTop
+      }
   },
   mounted() {
     this.$nextTick(() => {
+              window.addEventListener('scroll', this.handleScroll);
 
     })
   },
