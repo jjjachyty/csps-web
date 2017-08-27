@@ -20,11 +20,25 @@ export default new VueRouter({
      * build publicPath back to '' so Cordova builds work again.
      */
 
-    routes: [
-        { path: '/', component: load('Index') }, // Default
+    routes: [{
+            path: '/',
+            children: [
+                { path: '/', component: load('Main') }
+            ],
+            component: load('Index')
+        }, // Default
         { path: '/login', component: load('Login') }, //     
         { path: '/test', component: load('Test') }, //   
         { path: '/register', component: load('Register') }, //    
+        {
+            path: '/user',
+            component: load('Index'),
+            name: "user",
+            children: [
+                { path: "profile", component: load('user/Info') }
+            ]
+        },
         { path: '*', component: load('Error404') } // Not found
+
     ]
 })
