@@ -1,75 +1,150 @@
 <template>
   <q-layout ref="layout">
-     <div class="">
-         <div>
-             <img width="100%" src="statics/images/qq2cy.jpg"/>
-        </div>
-        <!-- -->
-
-        <div class="row justify-around">
-            <div>
-
-        <q-tabs   inverted class="shadow-1">
-                    
-        <q-tab default slot="title" name="base" label="基本信息" />
-        <q-tab slot="title" label="修改头像" />
-        <q-tab slot="title" label="修改密码" />
-        <q-tab slot="title" label="修改手机" />
-        <q-tab slot="title" label="账号绑定" />
-        <q-tab slot="title" label="认证信息" />
-              <q-tab-pane name="base">Tab One</q-tab-pane>
-
-      </q-tabs>
-
-            </div>
-            <!-- 头像简介-->
-           <div class="row justify-end">
-           <div class="col-auto">
-                   <q-card  square color="">
-      <q-item>
-        <!-- <q-item-side avatar="statics/images/boy-avatar.png" /> -->
-        <avatar username="Darth Vader"
-                src="statics/images/boy-avatar.png"
-                :size="100"></avatar>
-                <q-item-side/>
-        <q-item-main>
-          <q-item-tile label>Janly男</q-item-tile>
-          <q-item-tile sublabel>摄影君</q-item-tile>
-        </q-item-main>
-        <q-item-side/>
-      </q-item>
-      <q-card-media>
-        <img>
-      </q-card-media>
-      <q-card-title>
-        社团
-        <span slot="subtitle">の</span>
-      </q-card-title>
-            <q-card-separator inset />
-      <q-card-main>
-        <div>粉丝:2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-         关注:20
-        </div>
-      </q-card-main>
-            <q-card-actions align="around">
-        <q-btn flat round small color="red"><q-icon name="favorite" /></q-btn>
-        <q-btn flat round small color="teal"><q-icon name="mail" /></q-btn>
-      </q-card-actions>
-    </q-card>
-           </div>
-           </div>
-        </div>
-     </div>
+  
+    <!-- -->
+      <q-toolbar slot="header" color="secondary"  class="fixed-top">
+    <!-- toggles QLayout left side -->
+    <q-btn
+      flat
+      @click="$refs.layout.toggleLeft()"
+    >
+      <!-- <q-icon name="arrow_back" /> -->
+    </q-btn>
+    <q-toolbar-title>
+      账号设置
+    </q-toolbar-title>
+    </q-toolbar>
+    <div style="padding-top:50px">
 
 
+
+  
+      <q-list separator highlight>
+        <q-item>
+          <q-item-side>
+            <q-item-tile label>账号</q-item-tile>
+  
+          </q-item-side>
+          <q-item-main inset>
+            <q-item-tile right sublabel>15520010009</q-item-tile>
+          </q-item-main>
+          <q-item-side right>
+            <q-item-tile avatar>
+              <img src="statics/images/boy-avatar.png">
+            </q-item-tile>
+          </q-item-side>
+        </q-item>
+        <q-item-separator />
+        <q-item-separator />
+  
+        <q-item tag="label">
+          <q-item-side>
+            <q-item-tile label>
+              cn
+            </q-item-tile>
+  
+          </q-item-side>
+          <q-item-main />
+          <q-item-tile sublabel>15520010009</q-item-tile>
+  
+          <q-item-side right icon="chevron_right">
+          </q-item-side>
+        </q-item>
+  
+        <q-item-separator />
+  
+        <q-item tag="label">
+          <q-item-side>
+            <q-item-tile label>
+              性别
+            </q-item-tile>
+  
+          </q-item-side>
+          <q-item-main />
+          <q-item-tile sublabel>男</q-item-tile>
+  
+          <q-item-side right icon="chevron_right">
+          </q-item-side>
+        </q-item>
+  
+        <q-item tag="label">
+          <q-item-side>
+            <q-item-tile>
+              个性签名
+            </q-item-tile>
+  
+          </q-item-side>
+          <q-item-main />
+          <q-item-tile sublabel>有时候明明知道事情很假，你也不能去拆穿</q-item-tile>
+  
+          <q-item-side right icon="chevron_right">
+          </q-item-side>
+        </q-item>
+        <q-item-separator />
+        <q-item-separator />
+  
+        <q-item tag="label">
+          <q-item-side>
+            <q-item-tile label>
+              微信号
+            </q-item-tile>
+  
+          </q-item-side>
+          <q-item-main />
+          <q-item-tile sublabel>立刻绑定</q-item-tile>
+  
+          <q-item-side right icon="chevron_right">
+          </q-item-side>
+        </q-item>
+        <q-item tag="label">
+          <q-item-side>
+            <q-item-tile label>
+              QQ号
+            </q-item-tile>
+  
+          </q-item-side>
+          <q-item-main />
+          <q-item-tile sublabel>立刻绑定</q-item-tile>
+  
+          <q-item-side right icon="chevron_right">
+          </q-item-side>
+        </q-item>
+                        <q-item tag="label">
+          <q-item-side>
+            <q-item-tile label>
+              微博
+            </q-item-tile>
+  
+          </q-item-side>
+          <q-item-main />
+          <q-item-tile sublabel>立刻绑定</q-item-tile>
+  
+          <q-item-side right icon="chevron_right">
+          </q-item-side>
+        </q-item>
+      </q-list>
+      <q-item-separator />
+  
+      <q-btn color="primary" class="full-width">退出登陆</q-btn>
+  
+    </div>
+  
   </q-layout>
 </template>
+
 <script>
-import Avatar from 'vue-avatar/dist/Avatar'
-export default {
-  components: {
-    Avatar
+  import Avatar from 'vue-avatar/dist/Avatar'
+  export default {
+    components: {
+      Avatar
+    },
+    methods: {
+      handler(obj) {
+        console.log(obj.direction) // "right"
+        console.log(obj.duration) // 78
+        console.log(obj.distance.x) // 273
+      }
+    }
   }
-}
 </script>
 

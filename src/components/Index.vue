@@ -1,11 +1,9 @@
 <template>
-  <q-layout ref="layout" view="hHr LpR lFf" :right-breakpoint="1100" class="scroll ">
-    <HeaderBar ></HeaderBar>
-    <router-view></router-view>
-    <FooterBar></FooterBar>
-                     
-
-  </q-layout>
+<div style="overflow: hidden;">
+    <div style="padding-bottom:10px">
+    <router-view ></router-view>
+    </div>        <ToolBar></ToolBar>
+</div>
 </template>
 
 <script>
@@ -15,10 +13,12 @@
 
 import HeaderBar from 'components/common/Header'
 import FooterBar from 'components/common/Footer'
+import ToolBar from 'components/common/ToolBar'
 export default {
   components: {
     HeaderBar,
-    FooterBar
+    FooterBar,
+    ToolBar
   },
   data() {
     return {

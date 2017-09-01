@@ -1,14 +1,5 @@
 <template>
   <div ref="headerbar">
-      <!-- <q-toolbar inverted color="red-3">
-                
-                <q-btn flat>
-                  <q-icon name="face" /></q-btn>
-                <q-toolbar-title>
-                 <strong> Coser Stage</strong>
-                </q-toolbar-title> -->
-
-    <!-- Header -->
     <q-toolbar slot="header" color="purple-3" glossy>
       <q-toolbar-title>
         Cosplay Stage
@@ -22,12 +13,6 @@
         <q-item-main label="注册" />
       </q-side-link>
 
-<ul v-if="dropdown" class="dropdown-content">
-  <li><a href="#!">one</a></li>
-  <li><a href="#!">two</a></li>
-  <li class="divider"></li>
-  <li><a href="#!">three</a></li>
-</ul>
 
 <avatar v-if="user" username="Darth Vader"
                 src="statics/images/boy-avatar.png"
@@ -36,6 +21,7 @@
 
     <!-- Navigation -->
     <q-tabs slot="navigation" v-bind:class="fixedNav" id="navbar" v-if="showNavbar" inverted color="white">
+      
       <q-tab slot="title" label="竞技堂" count="30" color="cyan-8" to="/login" exact />
       <q-tab alert slot="title" label="TV" to="/login" color="teal-8" exact />
       <q-tab alert slot="title" label="商城" to="/group" exact color="green-8" />
